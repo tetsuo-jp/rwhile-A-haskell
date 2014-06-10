@@ -1,0 +1,20 @@
+read X ;   -- (X1.X2)  ==> (X1.X1+X2)
+  X1 ^= hd X ;
+  X2 ^= tl X ;
+  X ^= cons X1 X2 ; -- zero clear
+  X ^= X1 ;
+  from  =? X X1
+  do
+  loop  Y ^= tl X ;
+        X ^= cons nil Y ; -- zero clear
+        X ^= Y ;
+        Y ^= X ;          -- zero clear
+	Y ^= cons nil X2 ;
+        X2 ^= tl Y ;       -- zero clear
+        X2 ^= Y ;
+        Y ^= X2 ; -- zero clear
+  until =? X nil;
+  Y ^= cons X1 X2;
+  X1 ^= hd Y ;
+  X2 ^= tl Y ;
+write Y

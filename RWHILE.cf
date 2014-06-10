@@ -1,0 +1,34 @@
+-------------------------------------------
+-- Programming language R-WHILE
+-- cf. http://bnfc.digitalgrammars.com/
+-------------------------------------------
+
+-- Programs
+PDefs.      Program ::= "read" Ident ";" [Cmd] "write" Ident ;
+
+-- Commands
+SAss.       Cmd ::= Ident "^=" Exp ;
+SIf.        Cmd ::= "if" Exp "then" [Cmd] "else" [Cmd] "fi" Exp ;
+SLoop.      Cmd ::= "from" Exp "do" [Cmd] "loop" [Cmd] "until" Exp ;
+SStatus.    Cmd ::= "status" ;
+
+separator Cmd ";" ;
+
+-- Expressions
+AEq.        Exp1 ::= "=?" Exp2 Exp2 ;
+ATl.        Exp2 ::= "tl" Exp3 ;
+AHd.        Exp2 ::= "hd" Exp3 ;
+ACons.      Exp2 ::= "cons" Exp3 Exp3 ;
+AVar.       Exp3 ::= Ident ;
+ANil.       Exp3 ::= "nil" ;
+
+coercions Exp 3 ;
+
+-- Value
+Cons.       Val1 ::= "cons" Val2 Val2;
+Nil.        Val2 ::= "nil" ;
+
+coercions Val 2 ;
+
+comment "--" ;                  -- one line comments
+comment "{-" "-}" ;             -- multiple line comments

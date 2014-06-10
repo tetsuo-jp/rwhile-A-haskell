@@ -1,0 +1,10 @@
+read X ;
+  Y ^= X ;
+  from  =? Y X
+  do
+  loop  Z ^= tl Y ;
+	Y ^= cons nil Z ;
+	Y ^= Z ;
+	Z ^= Y ;
+  until =? Y nil ;
+write X
