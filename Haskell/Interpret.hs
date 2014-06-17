@@ -31,7 +31,7 @@ type Result = Err Store
 failure :: Show a => a -> Result
 failure x = Bad $ "Undefined case: " ++ show x
 
--- Store 中では Ident 以外は設定されていないか
+-- Whether all the values are set to nil except out
 check :: Store -> Ident -> Err ()
 check []           out = return ()
 check ((x,Nil):st) out = check st out
